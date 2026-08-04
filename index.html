@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FactoryAssist AI Prototype</title>
+  <style>
+    :root {
+      --navy:#122033; --blue:#2267d8; --pale:#eef4ff; --line:#d7dfeb;
+      --text:#172033; --muted:#627086; --white:#fff; --red:#b42318;
+      --amber:#a15c00; --green:#147a4b; --bg:#f5f7fa;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,Arial,sans-serif; background:var(--bg); color:var(--text); }
+    button, select, textarea { font:inherit; }
+    .shell { min-height:100vh; display:grid; grid-template-columns:230px 1fr; }
+    aside { background:var(--navy); color:white; padding:24px 16px; }
+    .brand { font-size:20px; font-weight:700; margin-bottom:28px; }
+    .brand small { display:block; margin-top:5px; color:#b9c7db; font-weight:400; }
+    nav button { width:100%; border:0; color:#dbe6f6; background:transparent; text-align:left; padding:12px; border-radius:9px; margin:4px 0; cursor:pointer; }
+    nav button.active, nav button:hover { background:#263951; color:white; }
+    main { padding:28px; max-width:1200px; width:100%; margin:auto; }
+    .top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:22px; }
+    h1 { font-size:27px; margin:0; }
+    h2 { font-size:19px; margin:0 0 14px; }
+    p { line-height:1.5; }
+    .subtitle { color:var(--muted); margin-top:5px; }
+    .badge { display:inline-block; padding:5px 9px; border-radius:999px; font-size:13px; background:var(--pale); color:var(--blue); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { background:white; border:1px solid var(--line); border-radius:14px; padding:20px; }
+    .wide { grid-column:span 2; }
+    label { display:block; font-weight:600; margin:14px 0 7px; }
+    select, textarea { width:100%; border:1px solid #b8c4d4; border-radius:9px; padding:11px; background:white; }
+    textarea { min-height:110px; resize:vertical; }
+    .primary { border:0; background:var(--blue); color:white; border-radius:9px; padding:11px 16px; margin-top:14px; cursor:pointer; font-weight:600; }
+    .secondary { border:1px solid var(--line); background:white; color:var(--text); border-radius:9px; padding:9px 13px; cursor:pointer; }
+    .metric { font-size:28px; font-weight:700; margin:5px 0; }
+    .muted { color:var(--muted); }
+    .status-high { color:var(--red); font-weight:700; }
+    .status-watch { color:var(--amber); font-weight:700; }
+    .status-good { color:var(--green); font-weight:700; }
+    .steps { padding-left:20px; }
+    .steps li { margin:9px 0; }
+    .callout { border-left:4px solid var(--blue); background:var(--pale); padding:13px 15px; border-radius:7px; }
+    .danger { border-left-color:var(--red); background:#fff0ee; }
+    .screen { display:none; }
+    .screen.active { display:block; }
+    .bar { height:9px; border-radius:9px; background:#e7ebf1; overflow:hidden; }
+    .bar span { display:block; height:100%; background:var(--blue); }
+    table { width:100%; border-collapse:collapse; }
+    th,td { text-align:left; padding:11px 7px; border-bottom:1px solid var(--line); }
+    @media(max-width:850px) {
+      .shell { grid-template-columns:1fr; }
+      aside { padding:14px; }
+      .brand { margin-bottom:10px; }
+      nav { display:flex; gap:4px; overflow:auto; }
+      nav button { min-width:max-content; width:auto; }
+      main { padding:18px; }
+      .grid { grid-template-columns:1fr; }
+      .wide { grid-column:auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">FactoryAssist AI<small>Manufacturing response intelligence</small></div>
+    <nav>
+      <button class="nav active" data-screen="operator">Operator</button>
+      <button class="nav" data-screen="reaction">Reaction Plan</button>
+      <button class="nav" data-screen="maintenance">Maintenance</button>
+      <button class="nav" data-screen="manager">Executive View</button>
+      <button class="nav" data-screen="knowledge">Knowledge Center</button>
+    </nav>
+  </aside>
+  <main>
+    <section id="operator" class="screen active">
+      <div class="top"><div><h1>Operator Assistant</h1><div class="subtitle">Get an approved response plan in seconds.</div></div><span class="badge">Demo plant</span></div>
+      <div class="grid">
+        <div class="card wide">
+          <h2>Report an equipment issue</h2>
+          <label for="equipment">Equipment</label>
+          <select id="equipment">
+            <option value="PRESS-004">PRESS-004 — Hydraulic Press #4</option>
+            <option value="CONV-002">CONV-002 — Assembly Conveyor</option>
+            <option value="MOTOR-004">MOTOR-004 — Drive Motor</option>
+          </select>
+          <label for="problem">What are you observing?</label>
+          <textarea id="problem">The press is losing pressure and cycling slowly.</textarea>
+          <button id="generate" class="primary">Generate reaction plan</button>
+        </div>
+        <div class="card">
+          <h2>Machine context</h2>
+          <p><strong>Location:</strong> Stamping Line 2</p>
+          <p><strong>Status:</strong> <span class="status-watch">Attention needed</span></p>
+          <p><strong>Last PM:</strong> July 20, 2026</p>
+          <p><strong>Criticality:</strong> High</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reaction" class="screen">
+      <div class="top"><div><h1>AI Reaction Plan</h1><div class="subtitle" id="reaction-machine">PRESS-004 — Hydraulic Press #4</div></div><span class="badge">Approved source: HYD-101</span></div>
+      <div class="grid">
+        <div class="card wide">
+          <p class="status-high">HIGH PRIORITY</p>
+          <h2>Hydraulic Pressure Loss</h2>
+          <h3>Do this now</h3>
+          <ol class="steps">
+            <li>Stop production and place the equipment in a safe condition.</li>
+            <li>Check for visible leaks from outside guarded areas.</li>
+            <li>Record the pressure reading and active alarm code.</li>
+            <li>Notify maintenance and the area supervisor.</li>
+          </ol>
+          <div class="callout danger"><strong>Do not:</strong> Adjust pressure settings without authorization or continue production with unstable pressure.</div>
+        </div>
+        <div class="card">
+          <h2>Safety and escalation</h2>
+          <p><strong>Risks:</strong> Stored hydraulic energy, fluid injection, slip hazard</p>
+          <p><strong>Notify:</strong> Maintenance and area supervisor</p>
+          <p><strong>SOP:</strong> HYD-101</p>
+          <button class="secondary" data-screen-link="maintenance">View machine history</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="maintenance" class="screen">
+      <div class="top"><div><h1>Maintenance Intelligence</h1><div class="subtitle">PRESS-004 equipment history and recommended checks.</div></div><span class="badge">Technician view</span></div>
+      <div class="grid">
+        <div class="card wide">
+          <h2>Previous events</h2>
+          <table>
+            <thead><tr><th>Date</th><th>Issue</th><th>Root cause</th><th>Downtime</th></tr></thead>
+            <tbody>
+              <tr><td>Mar 15, 2026</td><td>Pressure loss</td><td>Pressure valve failure</td><td>3.0 hrs</td></tr>
+              <tr><td>Jan 12, 2026</td><td>Hydraulic leak</td><td>Damaged hose fitting</td><td>1.5 hrs</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h2>AI recommendation</h2>
+          <p>Inspect the pressure valve, fluid level, and hydraulic lines first.</p>
+          <div class="callout"><strong>Why:</strong> Current symptoms resemble the March 2026 valve failure.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="manager" class="screen">
+      <div class="top"><div><h1>Executive Reliability View</h1><div class="subtitle">Where leadership should focus today.</div></div><span class="badge">Weekly view</span></div>
+      <div class="grid">
+        <div class="card"><div class="muted">Open high-priority issues</div><div class="metric">3</div><div class="status-high">1 requires immediate action</div></div>
+        <div class="card"><div class="muted">Average response time</div><div class="metric">12 min</div><div class="status-good">Target: under 15 min</div></div>
+        <div class="card"><div class="muted">Repeat issues this month</div><div class="metric">7</div><div class="status-watch">Hydraulics lead recurrence</div></div>
+        <div class="card wide">
+          <h2>Equipment health</h2>
+          <p>PRESS-004 — 68%</p><div class="bar"><span style="width:68%"></span></div>
+          <p>CONV-002 — 74%</p><div class="bar"><span style="width:74%"></span></div>
+          <p>CNC-003 — 91%</p><div class="bar"><span style="width:91%"></span></div>
+        </div>
+        <div class="card">
+          <h2>Recommended focus</h2>
+          <p>Schedule a hydraulic-system review for Press #4 and verify operator training on early warning signs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="knowledge" class="screen">
+      <div class="top"><div><h1>Knowledge Center</h1><div class="subtitle">Manage approved plant procedures and manuals.</div></div><span class="badge">Admin view</span></div>
+      <div class="grid">
+        <div class="card wide">
+          <h2>Add an approved document</h2>
+          <label for="doc-type">Document type</label>
+          <select id="doc-type"><option>SOP</option><option>Equipment manual</option><option>Training document</option><option>Maintenance record</option></select>
+          <label for="doc-title">Document title</label>
+          <textarea id="doc-title" style="min-height:55px">HYD-101 Hydraulic Troubleshooting</textarea>
+          <button id="upload" class="primary">Simulate upload</button>
+          <p id="upload-result" class="muted" aria-live="polite"></p>
+        </div>
+        <div class="card">
+          <h2>Governance</h2>
+          <p>Documents should be reviewed, revision-controlled, and assigned to the correct equipment before use in operator guidance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+  const screens = [...document.querySelectorAll('.screen')];
+  const navButtons = [...document.querySelectorAll('.nav')];
+
+  function showScreen(id) {
+    screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
+    navButtons.forEach(button => button.classList.toggle('active', button.dataset.screen === id));
+  }
+
+  navButtons.forEach(button => button.addEventListener('click', () => showScreen(button.dataset.screen)));
+  document.querySelectorAll('[data-screen-link]').forEach(button =>
+    button.addEventListener('click', () => showScreen(button.dataset.screenLink))
+  );
+
+  document.getElementById('generate').addEventListener('click', () => {
+    const equipment = document.getElementById('equipment');
+    document.getElementById('reaction-machine').textContent =
+      equipment.options[equipment.selectedIndex].text;
+    showScreen('reaction');
+  });
+
+  document.getElementById('upload').addEventListener('click', () => {
+    document.getElementById('upload-result').textContent =
+      'Demo complete: document queued for approval and indexing.';
+  });
+</script>
+</body>
+</html>

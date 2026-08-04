@@ -1,0 +1,126 @@
+[
+  {
+    "issue_id": "RP-001",
+    "issue": "Hydraulic Pressure Loss",
+    "keywords": [
+      "pressure",
+      "hydraulic",
+      "slow cycle",
+      "weak press"
+    ],
+    "priority": "High",
+    "actions": [
+      "Stop production and place the equipment in a safe condition.",
+      "Check for visible leaks from outside guarded areas.",
+      "Record the pressure reading and active alarm code.",
+      "Notify maintenance and the area supervisor."
+    ],
+    "do_not": [
+      "Do not adjust pressure settings unless authorized.",
+      "Do not continue production with unstable pressure."
+    ],
+    "safety_risks": [
+      "Stored hydraulic energy",
+      "Fluid injection",
+      "Slip hazard"
+    ],
+    "notify": [
+      "Maintenance",
+      "Area supervisor"
+    ],
+    "sop": "HYD-101"
+  },
+  {
+    "issue_id": "RP-002",
+    "issue": "Abnormal Grinding Noise",
+    "keywords": [
+      "grinding",
+      "loud noise",
+      "knocking",
+      "rough sound"
+    ],
+    "priority": "High",
+    "actions": [
+      "Stop the equipment.",
+      "Keep personnel clear of moving and guarded components.",
+      "Record where and when the sound occurred.",
+      "Notify maintenance before restart."
+    ],
+    "do_not": [
+      "Do not remove guarding.",
+      "Do not repeatedly restart the equipment."
+    ],
+    "safety_risks": [
+      "Unexpected component failure",
+      "Moving equipment"
+    ],
+    "notify": [
+      "Maintenance",
+      "Area supervisor"
+    ],
+    "sop": "MECH-202"
+  },
+  {
+    "issue_id": "RP-003",
+    "issue": "Motor Overheating",
+    "keywords": [
+      "overheat",
+      "hot motor",
+      "burning smell",
+      "high temperature"
+    ],
+    "priority": "Critical",
+    "actions": [
+      "Stop the equipment.",
+      "Keep personnel away from the motor and electrical enclosure.",
+      "Report any smoke, odor, or visible damage.",
+      "Notify electrical maintenance immediately."
+    ],
+    "do_not": [
+      "Do not touch hot surfaces.",
+      "Do not open energized electrical cabinets."
+    ],
+    "safety_risks": [
+      "Electrical hazard",
+      "Hot surfaces",
+      "Fire risk"
+    ],
+    "notify": [
+      "Electrical maintenance",
+      "Area supervisor",
+      "Safety if smoke is present"
+    ],
+    "sop": "ELEC-204"
+  },
+  {
+    "issue_id": "RP-004",
+    "issue": "Conveyor Jam",
+    "keywords": [
+      "conveyor jam",
+      "material stuck",
+      "belt stopped",
+      "blocked conveyor"
+    ],
+    "priority": "High",
+    "actions": [
+      "Stop the conveyor.",
+      "Secure the area and notify the supervisor.",
+      "Follow the approved jam-clearing and lockout/tagout procedure.",
+      "Have authorized personnel remove the obstruction."
+    ],
+    "do_not": [
+      "Do not reach into the conveyor.",
+      "Do not bypass a guard or interlock."
+    ],
+    "safety_risks": [
+      "Pinch points",
+      "Unexpected startup",
+      "Stored energy"
+    ],
+    "notify": [
+      "Area supervisor",
+      "Maintenance"
+    ],
+    "sop": "CONV-110"
+  }
+]
